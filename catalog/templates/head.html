@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Meals catalog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+        <script src="{{url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+        <script src="{{url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+    </head>
+
+<body>
+    <section class="container">
+        <header>
+            <div class="row">
+                <!-- Navbar -->
+                <nav class="navbar navbar-default col-md-12">
+                    <div class="navbar-header">
+                        <!-- This bit is more complicated because it toggles based on if it's mobile view-->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{url_for('home')}}">Meals catalog</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li><a href="{{url_for('home')}}"><span class="glyphicon glyphicon-home"></span></a></li>
+                            <li><a href="{{url_for('newMeal')}}">Add meal</a></li>
+                            <li><a href="{{url_for('newSupplier')}}">Add supplier</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{url_for('showLogin')}}">Login</a></li>
+                            <li><a href="{{url_for('gdisconnect')}}">Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        <div class="row">
+          <div class="col-md-12">
+          {% with messages = get_flashed_messages() %}
+              {% if messages %}
+              <ul class="flash text-center">
+              {% for message in messages %}
+                  <li> <strong> {{ message }} </strong> </li>
+              {% endfor %}
+              </ul>
+              {% endif %}
+          {% endwith %}
+          </div>
+        </div>
+        </header>
+
+
+        {% block content %}
+        {% endblock %}
+        <!-- For Google sign in -->
+        <script>
+            function signInCallback(authResult) {
+              if (authResult['code']) {
+                // Hide the sign-in button now that the user is authorized
+                $('#signinButton').attr('style', 'display: none');
+                // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+                $.ajax({
+                  type: 'POST',
+                  url: '/gconnect?state={{STATE}}',
+                  processData: false,
+                  data: authResult['code'],
+                  contentType: 'application/octet-stream; charset=utf-8',
+                  success: function(result) {
+                    // Handle or verify the server response if necessary.
+                    if (result) {
+                      $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                     setTimeout(function() {
+                      window.location.href = "/home";
+                     }, 4000);
+
+                  } else if (authResult['error']) {
+                console.log('There was an error: ' + authResult['error']);
+              } else {
+                    $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                     }
+                  }
+
+              }); } }
+        </script>
+
+    </section>
+</body>

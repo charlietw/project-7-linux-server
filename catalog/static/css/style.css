@@ -1,0 +1,17 @@
+td {
+    padding-bottom: 10px;
+    padding-right:10px;
+}
+
+.title {
+	margin-top: 10px;
+}
+
+.flash {
+	background-color: rgba(0, 255, 0, 0.3);
+}
+
+.delete:hover {
+	background-color: rgb(255, 102, 102);
+}
+

@@ -1,0 +1,38 @@
+{% extends "head.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Suppliers</h1>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <table>
+            {% for supplier in suppliers %}
+            <tr>
+                <td>
+                    {{supplier.name}}
+                </td>
+                <td>
+                    <a href="{{url_for('showMenu', supplier_id = supplier.id)}}">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-apple"></span> View meals
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{url_for('editSupplier', supplier_id = supplier.id)}}">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
