@@ -18,7 +18,7 @@ from functools import wraps
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 
 CLIENT_ID = json.loads(
    open('/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
