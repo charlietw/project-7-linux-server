@@ -116,17 +116,19 @@ def gconnect():
 
     # See if user exists, if it doesn't, make a new one.
 
-    try:
-        print "Line one"
-        user_id = getUserID(login_session['email'])
-        print "Line two"
-        if not user_id:
-            createUser(login_session)
-        login_session['user_id'] = user_id
-        print user_id
-        print login_session['user_id']
-    except:
-        print "Error"
+    #try:
+    print "Line one"
+    user_id = getUserID(login_session['email'])
+    print "Line two"
+    if not user_id:
+        print "Line three"
+        createUser(login_session)
+        print "Line four"
+    login_session['user_id'] = user_id
+    print user_id
+    print login_session['user_id']
+    #except:
+        #print "Error"
 
     output = ''
     output += '<h1>Welcome, '
