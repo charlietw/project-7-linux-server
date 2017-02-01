@@ -110,6 +110,9 @@ def gconnect():
     login_session['username'] = data['name']
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
+    
+    print login_session['email']
+    print data['email']
 
     # See if user exists, if it doesn't, make a new one.
 
