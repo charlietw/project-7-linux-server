@@ -13,7 +13,7 @@ import json
 from flask import make_response
 import requests
 from functools import wraps
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
