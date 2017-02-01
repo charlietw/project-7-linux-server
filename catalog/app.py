@@ -13,12 +13,12 @@ import json
 from flask import make_response
 import requests
 from functools import wraps
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 
 CLIENT_ID = json.loads(
    open('/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
