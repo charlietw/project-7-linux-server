@@ -150,6 +150,7 @@ def getUserInfo(user_id):
 
 
 def getUserID(email):
+    print "getUserID called"
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
