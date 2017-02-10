@@ -370,9 +370,10 @@ def deleteMeal(supplier_id, meal_id):
             return redirect(url_for('showMenu', supplier_id=supplier_id))
     return render_template('deleteMeal.html', item=itemToDelete)
 
-
+application = app
 
 app.secret_key = 'super_secret_key'
 app.debug = True
-app.run(host='35.165.221.220', port=80)
+if __name__ == '__main__':
+	app.run()
 
